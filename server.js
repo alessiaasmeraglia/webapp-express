@@ -1,4 +1,5 @@
 import express from 'express';
+import productsRouter from "./src/routers/productsRouter.js";
 //import router from './routers/nomeFile.js';
 //import notFound from './middlewares/nomeFile.js';
 
@@ -10,7 +11,7 @@ const host = process.env.HOST || "localhost";
 app.use(express.json());
 app.use(express.static('public'));
 
-app.use('/products', productsRouters);
+app.use('/products', productsRouter);
 
 app.listen(port, (error) => {
     if (error) {
