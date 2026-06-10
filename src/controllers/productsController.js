@@ -1,5 +1,5 @@
 import { createConnection } from "mysql2";
-import connection from "../db/connections/connection";
+import connection from "../db/connections/connection.js";
 
 async function index(request, response) {
     try{
