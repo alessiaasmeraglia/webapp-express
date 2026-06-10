@@ -1,6 +1,5 @@
 import express from 'express';
-//import router from './routers/nomeFile.js';
-//import notFound from './middlewares/nomeFile.js';
+import productsRouter from './src/routers/products.js'
 
 const app = express();
 
@@ -10,7 +9,7 @@ const host = process.env.HOST || "localhost";
 app.use(express.json());
 app.use(express.static('public'));
 
-app.use('/products', productsRouters);
+app.use('/products', productsRouter);
 
 app.listen(port, (error) => {
     if (error) {
@@ -18,4 +17,4 @@ app.listen(port, (error) => {
     } else {
         console.log(`Server is running on http://${host}:${port}`);
     }
-})
+});

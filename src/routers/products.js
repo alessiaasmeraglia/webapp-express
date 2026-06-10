@@ -1,4 +1,5 @@
-
+import { index, show, create, destroy, modify } from '../controllers/products.js';
+import express from 'express';
 
 const router = express.Router();
 
@@ -16,3 +17,5 @@ router.patch('/:id', modify)
 
 // DELETE
 router.delete('/:id', destroy)
+
+export default router;
