@@ -25,4 +25,4 @@ app.listen(port, (error) => {
     } else {
         console.log(`Server is running on http://${host}:${port}`);
     }
-})
+});
