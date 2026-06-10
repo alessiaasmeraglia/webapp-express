@@ -61,9 +61,24 @@ async function show(request, response) {
 
         const product = rows[0];
 
-        return response.json({
+        // query per le categorie
+        const queryCategories = `
+        select c.name
+        from category_product cp
+            join categories c 
+                on cp.category_id = c.id
+        where cp.product_id = ?
+        `;
+
+        // associo i le categorie
+        const [categories] = await connection.execute(queryCategories, [id]);
+
+        product.categories = categories;
+
+        response.json({
+            error: null,
             results: product
-        });
+        })
 
     } catch (error) {
         console.log(error);
