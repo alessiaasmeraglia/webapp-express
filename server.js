@@ -1,5 +1,7 @@
 import express from 'express';
 import reviewsRouter from './src/routers/reviewsRouter.js';
+import productsRouter from "./src/routers/productsRouter.js";
+//import router from './routers/nomeFile.js';
 //import notFound from './middlewares/nomeFile.js';
 
 const app = express();
@@ -11,6 +13,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/reviews', reviewsRouter);
+app.use('/products', productsRouter);
 
 app.listen(port, (error) => {
     if (error) {
