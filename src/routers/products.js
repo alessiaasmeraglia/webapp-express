@@ -1,4 +1,11 @@
-
+import express from 'express';
+import {
+    index,
+    show,
+    create,
+    modify,
+    destroy
+} from '../controllers/products.js';
 
 const router = express.Router();
 
@@ -16,3 +23,6 @@ router.patch('/:id', modify)
 
 // DELETE
 router.delete('/:id', destroy)
+
+
+export default router;
