@@ -1,6 +1,6 @@
 import express from 'express';
 import reviewsRouter from './src/routers/reviewsRouter.js';
-
+import categoriesRouter from './src/routers/categoriesRouter.js';
 import productsRouter from './src/routers/productsRouter.js';
 
 
@@ -18,6 +18,7 @@ app.use('/products', productsRouter);
 
 app.use('/reviews', reviewsRouter);
 app.use('/products', productsRouter);
+app.use('/categories', categoriesRouter);
 
 app.listen(port, (error) => {
     if (error) {
