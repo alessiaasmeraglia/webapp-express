@@ -2,6 +2,7 @@ import express from 'express';
 import reviewsRouter from './src/routers/reviewsRouter.js';
 
 import productsRouter from './src/routers/productsRouter.js';
+import cors from 'cors';
 
 
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000;
 const host = process.env.HOST || "localhost";
 
 app.use(express.json());
+app.use(cors());
 app.use(express.static('public'));
 app.use('/reviews', reviewsRouter);
 app.use('/products', productsRouter);
