@@ -22,7 +22,7 @@ async function index(request, response) {
                 LEFT JOIN categories
                     ON category_product.category_id = categories.id
             GROUP BY products.id
-            ORDER BY products.id
+            ORDER BY created_at desc
     `;
 
         const [products] = await connection.query(sql);
