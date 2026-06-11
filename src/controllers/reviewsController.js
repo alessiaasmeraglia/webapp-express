@@ -7,7 +7,11 @@ async function index(request, response) {
 
         response.json({
             error: null,
-            results: rows
+            results: rows.map(row => {
+                return {...row,
+                    rating: Number(row.rating)
+                }
+            })
         });
     } catch(error) {
         response.status(500).json({
@@ -57,7 +61,9 @@ async function show(request, response) {
 
         response.json({
             error: null,
-            results: review
+            results: {...review,
+                rating: Number(review.rating)
+            }
         })
 
     } catch(error) {

@@ -28,7 +28,12 @@ async function index(request, response) {
         const [products] = await connection.query(sql);
 
         response.json({
-            data: products,
+            data: products.map(product => {
+                const x = Number(product.price);
+                return {...product,
+                    price: x
+                }
+            })
         });
     } catch (error) {
         console.error(error);
@@ -78,7 +83,9 @@ async function show(request, response) {
 
         response.json({
             error: null,
-            results: product
+            results: {...product,
+                price: Number(product.price)
+            }
         })
 
     } catch (error) {
