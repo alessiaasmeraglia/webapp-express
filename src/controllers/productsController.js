@@ -50,7 +50,7 @@ async function show(request, response) {
     const { id } = request.params;
 
     const query = `
-        SELECT id, name, price, description, image
+        SELECT id, name, price, description, image, available
         FROM products p
         WHERE p.id = ?
     `;
