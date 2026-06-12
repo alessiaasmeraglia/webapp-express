@@ -1,5 +1,6 @@
 
 import connection from "../db/connections/connection.js";
+import { avgReviews, countReviews } from "../utils/reviewsQueries.js";
 
 async function index(request, response) {
     try {
@@ -81,10 +82,15 @@ async function show(request, response) {
 
         product.categories = categories;
 
+        const total_reviews = await countReviews(id);
+        const average_rating = await avgReviews(id);
+
         response.json({
             error: null,
             results: {...product,
-                price: Number(product.price)
+                price: Number(product.price),
+                total_reviews,
+                average_rating
             }
         })
 
