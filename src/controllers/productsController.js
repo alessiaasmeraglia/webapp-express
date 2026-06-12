@@ -3,7 +3,11 @@ import connection from "../db/connections/connection.js";
 
 async function index(request, response) {
     try {
-        const sql = `
+        const { search } = request.query;
+        let sql;
+        let searchValue = [];
+
+        sql = `
             SELECT 
                 products.id,
                 products.name,
@@ -25,12 +29,39 @@ async function index(request, response) {
             ORDER BY created_at desc
     `;
 
-        const [products] = await connection.query(sql);
+        if (search) {
+            sql = `
+                SELECT 
+                    products.id,
+                    products.name,
+                    products.price,
+                    products.description,
+                    products.available,
+                    products.in_stock,
+                    products.ingredient,
+                    products.image,
+                    products.created_at,
+                    products.updated_at,
+                GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories
+                FROM products
+                    LEFT JOIN category_product
+                        ON products.id = category_product.product_id
+                    LEFT JOIN categories
+                        ON category_product.category_id = categories.id
+                WHERE products.name = ?
+                GROUP BY products.id
+                ORDER BY created_at desc
+            `;
+            searchValue = [search];
+        }
+
+        const [products] = await connection.query(sql, searchValue);
 
         response.json({
             data: products.map(product => {
                 const x = Number(product.price);
-                return {...product,
+                return {
+                    ...product,
                     price: x
                 }
             })
