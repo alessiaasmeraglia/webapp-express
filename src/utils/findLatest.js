@@ -7,7 +7,7 @@ async function findLatest() {
                                             FROM products
                                             ORDER BY updated_at
                                             LIMIT 5;`);
-    console.log(latest);
+    return latest;
     
 }
 
